@@ -18,4 +18,9 @@ void print(const size_t line, const size_t column, const char *__restrict str, .
  */
 void println(const size_t column, const char *__restrict str, ...);
 
+/**
+ * @brief Reset current_max_line, to restart writting where we want, when we refresh the screen for example_
+ */
+void set_current_max_line(size_t line);
+
 #endif

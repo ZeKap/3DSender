@@ -1,6 +1,6 @@
 #include "printer.hpp"
 
-size_t current_max_line = 5;
+size_t current_max_line = 1;
 
 void print(const size_t line, const size_t column, const char *__restrict format, ...)
 {
@@ -25,4 +25,9 @@ void println(const size_t column, const char *__restrict format, ...)
 
     va_end(args);
     current_max_line++;
+}
+
+void set_current_max_line(size_t line)
+{
+    current_max_line = line;
 }
