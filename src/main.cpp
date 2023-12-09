@@ -4,14 +4,17 @@
 #include "printer.hpp"
 #include "network.hpp"
 
-
-void print_stuff_to_screen(u32 kpressed, char* IP) {
+void print_stuff_to_screen(u32 kpressed, char *IP)
+{
 	static size_t frames = 0;
 	static size_t selected = 0;
 
-	if (kpressed & KEY_UP) {
+	if (kpressed & KEY_UP)
+	{
 		selected = (selected - 1) % 4;
-	} else if (kpressed & KEY_DOWN) {
+	}
+	else if (kpressed & KEY_DOWN)
+	{
 		selected = (selected + 1) % 4;
 	}
 
@@ -32,11 +35,13 @@ void print_stuff_to_screen(u32 kpressed, char* IP) {
 }
 
 // returns true if we should exit
-bool should_exit() {
+bool should_exit()
+{
 	u32 kpressed = hidKeysDown();
-	
-	//Break in order to return to hbmenu // it also break citra
-	if (kpressed & KEY_START) {
+
+	// Break in order to return to hbmenu // it also break citra
+	if (kpressed & KEY_START)
+	{
 		return true;
 	}
 	return false;
@@ -45,20 +50,21 @@ bool should_exit() {
 int main()
 {
 	gfxInitDefault();
-	//gfxSet3D(true); //Uncomment if using stereoscopic 3D
-	consoleInit(GFX_TOP, NULL); //Change this line to consoleInit(GFX_BOTTOM, NULL) if using the bottom screen.
+	// gfxSet3D(true); //Uncomment if using stereoscopic 3D
+	consoleInit(GFX_TOP, NULL); // Change this line to consoleInit(GFX_BOTTOM, NULL) if using the bottom screen.
 
 	auto res = init_network();
-	if (res != 0) {
+	if (res != 0)
+	{
 		print(6, 0, "Network init failed: %i", res);
 	}
 
-	char * IP = test_get_IP();
+	char *IP = test_get_IP();
 
 	// Main loop
 	while (aptMainLoop() && !should_exit())
 	{
-		hidScanInput(); // check for new input
+		hidScanInput();				  // check for new input
 		u32 kpressed = hidKeysDown(); // get input
 
 		print_stuff_to_screen(kpressed, IP);
