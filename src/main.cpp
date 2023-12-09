@@ -61,6 +61,9 @@ int main()
 
 	char *IP = get_IP();
 
+	int sock_server_fd = launch_server();
+	int sock_client_fd = accept_client(sock_server_fd);
+
 	// Main loop
 	while (aptMainLoop() && !should_exit())
 	{
@@ -68,6 +71,8 @@ int main()
 		u32 kpressed = hidKeysDown(); // get input
 
 		print_stuff_to_screen(kpressed, IP);
+		// char[] => char*
+		write_client_msg(sock_client_fd, "Hello from the server");
 
 		gspWaitForVBlank(); // frame limiter
 
@@ -76,6 +81,8 @@ int main()
 		gfxSwapBuffers();
 	}
 
+	close(sock_client_fd);
+	close(sock_server_fd);
 	gfxExit();
 	return 0;
 }

@@ -1,6 +1,7 @@
 #include "network.hpp"
 #include <string.h>
 #include <malloc.h>
+#include <poll.h>
 
 #define MAX_CONNECTIONS 5
 #define PORT 8000
@@ -20,7 +21,7 @@ Result init_network() {
      return 0;
 }
 
-void launch_test_server() {
+int launch_server() {
     // ipv4, tcp, (tkt)
     int sock_server = socket(AF_INET, SOCK_STREAM, 0);
 
@@ -52,31 +53,47 @@ void launch_test_server() {
     
     println(0, "Le serveur écoute sur le port %d", PORT);
 
+    return sock_server;
+}
+
+int accept_client(int sock_server) {
     // socket client pour parler
     struct sockaddr_in sockaddr_client;
     socklen_t size = sizeof(sockaddr_client);
 
     // accepte la connexion du client
     int sock_client = accept(sock_server, (struct sockaddr *) &sockaddr_client, &size);
-         if(sock_client == -1){
-             println(0, "T'as fait de la merde: sock_client");
-             println(0, "Avec errno %d", errno);
-         }
-    // on envoie des données au client
-    std::string message = "caca";
-    int send_working = write(sock_client, message.c_str(), message.length());
-    if(send_working == -1){
-         println(0, "T'as fait de la merde: send_working");
-         println(0, "Avec errno %d", errno);
-    }
-    println(0, "L'envoi a marché: %d", send_working);
+     if(sock_client == -1){
+          println(0, "T'as fait de la merde: sock_client");
+          println(0, "Avec errno %d", errno);
+     }
 
-    // on ferme le socket du client
-    int close_working = close(sock_client);
-    if(close_working == -1){
-         println(0, "T'as fait de la merde: close_working");
-         println(0, "Avec errno %d", errno);
-    }
+     return sock_client;
+}
+
+bool read_client_msg(int sock_client) {
+     char buffer[256];
+     int bytes_read = read(sock_client, buffer, 256-1);
+     if (bytes_read==-1){ // error
+          return false;
+     } else if(bytes_read==0){ // connection finished
+          return false;
+     } else {
+          buffer[bytes_read] = 0;
+          println(6, "Message: %s", buffer);
+          return true;
+     }
+}
+
+bool write_client_msg(int sock_client, const char *msg) {
+     int written_bytes = write(sock_client, msg, strlen(msg));
+     if (written_bytes==-1){
+          return false;
+     } else if((size_t) written_bytes!=strlen(msg)){
+          return false;
+     } else {
+          return true;
+     }
 }
 
 char * get_IP() {
@@ -91,3 +108,5 @@ char * get_IP() {
      
      return strIP;
 }
+
+
