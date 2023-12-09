@@ -1,7 +1,8 @@
 #include <string.h>
-#include <stdio.h>
 #include <3ds.h>
 #include "printer.hpp"
+#include "network.hpp"
+
 
 int main()
 {
@@ -12,6 +13,10 @@ int main()
 	size_t frames = 0;
 	size_t selected = 0;
 
+	acInit();
+
+	je_fonctionne();
+
 	// Main loop
 	while (aptMainLoop())
 	{
@@ -20,17 +25,17 @@ int main()
 		hidScanInput();
 
 		//Your code goes here
-		print_line(1, 0, "Hello world!");
+		print(1, 0, "Hello world!");
 
-		print_line(2, 0, "Frame: %d", frames);
-		print_line(3, 0, "Press START to exit.");
-		print_line(4, 0, "Selected: %ld", selected);
-		print_line(6, 0, "---------------------");
+		print(2, 0, "Frame: %d", frames);
+		print(3, 0, "Press START to exit.");
+		print(4, 0, "Selected: %ld", selected);
+		print(7, 0, "---------------------");
 
-		print_line(7, 2, "%c Option 1", selected == 0 ? '>' : ' ');
-		print_line(8, 2, "%c Option 2", selected == 1 ? '>' : ' ');
-		print_line(9, 2, "%c Option 3", selected == 2 ? '>' : ' ');
-		print_line(10, 2, "%c Option 4", selected == 3 ? '>' : ' ');
+		print_line(8, 2, "%c Option 1", selected == 0 ? '>' : ' ');
+		print_line(9, 2, "%c Option 2", selected == 1 ? '>' : ' ');
+		print_line(10, 2, "%c Option 3", selected == 2 ? '>' : ' ');
+		print_line(11, 2, "%c Option 4", selected == 3 ? '>' : ' ');
 
 		u32 kpressed = hidKeysDown();
 
@@ -39,8 +44,8 @@ int main()
 		else if (kpressed & KEY_DOWN)
 			selected = (selected + 1) % 4;
 
-		//if (kDown & KEY_START)
-		//	break; //Break in order to return to hbmenu // it also break citra
+		if (kpressed & KEY_START)
+			break; //Break in order to return to hbmenu // it also break citra
 
 		// Flush and swap frame-buffers
 		gfxFlushBuffers();
