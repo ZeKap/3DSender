@@ -100,14 +100,14 @@ bool read_client_msg(int sock_client)
      }
 }
 
-bool write_client_msg(int sock_client, const char *msg)
+bool write_client_msg(int sock_client, const void *data, size_t size)
 {
-     int written_bytes = write(sock_client, msg, strlen(msg));
+     int written_bytes = write(sock_client, data, size);
      if (written_bytes == -1)
      {
           return false;
      }
-     else if ((size_t)written_bytes != strlen(msg))
+     else if ((size_t)written_bytes != size)
      {
           return false;
      }

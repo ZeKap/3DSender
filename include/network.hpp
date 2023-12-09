@@ -11,7 +11,7 @@
 int launch_server();
 int accept_client(int sock_server);
 bool read_client_msg(int sock_client);
-bool write_client_msg(int sock_client, const char *msg);
+bool write_client_msg(int sock_client, const void *data, size_t size);
 
 char * get_IP();
 

@@ -72,7 +72,7 @@ int main()
 
 		print_stuff_to_screen(kpressed, IP);
 		// char[] => char*
-		write_client_msg(sock_client_fd, "Hello from the server");
+		write_client_msg(sock_client_fd, &kpressed, 4);
 
 		gspWaitForVBlank(); // frame limiter
 
