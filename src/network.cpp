@@ -2,12 +2,17 @@
 #include <string.h>
 #include <malloc.h>
 
-
 #define MAX_CONNECTIONS 5
 #define PORT 8000
 
+bool init_network() {
+     acInit();
+     socInit((u32 *)memalign(0x1000, 0x100000), 0x100000);
+     // one day we'll use the bool.... one day
+     return true;
+}
+
 void launch_test_server() {
-	socInit((u32 *)memalign(0x1000, 0x100000), 0x100000);
     // ipv4, tcp, (tkt)
     int sock_server = socket(AF_INET, SOCK_STREAM, 0);
 

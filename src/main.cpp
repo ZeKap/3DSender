@@ -14,8 +14,7 @@ int main()
 	size_t frames = 0;
 	size_t selected = 0;
 
-	acInit();
-	socInit((u32 *)memalign(0x1000, 0x100000), 0x100000);
+	init_network();
 
 	char * IP = test_get_IP();
 	//launch_test_server();

@@ -12,4 +12,7 @@ void launch_test_server();
 
 char * test_get_IP();
 
+// returns true if everything went ok
+bool init_network();
+
 #endif
