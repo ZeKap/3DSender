@@ -4,8 +4,10 @@
 #include "printer.hpp"
 #include "network.hpp"
 
-void print_stuff_to_screen(u32 kpressed, char *IP)
+void print_stuff_to_screen(char *IP)
 {
+	u32 kpressed = hidKeysHeld(); // get input
+
 	static size_t frames = 0;
 	static size_t selected = 0;
 
@@ -68,11 +70,11 @@ int main()
 	while (aptMainLoop() && !should_exit())
 	{
 		hidScanInput();				  // check for new input
-		u32 kpressed = hidKeysDown(); // get input
+		u32 kheld = hidKeysHeld(); // get input
 
-		print_stuff_to_screen(kpressed, IP);
+		print_stuff_to_screen(IP);
 		// char[] => char*
-		write_client_msg(sock_client_fd, &kpressed, 4);
+		write_client_msg(sock_client_fd, &kheld, 4);
 
 		gspWaitForVBlank(); // frame limiter
 
