@@ -59,7 +59,7 @@ int main()
 		print(6, 0, "Network init failed: %i", res);
 	}
 
-	char *IP = test_get_IP();
+	char *IP = get_IP();
 
 	// Main loop
 	while (aptMainLoop() && !should_exit())

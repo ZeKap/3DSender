@@ -79,7 +79,7 @@ void launch_test_server() {
     }
 }
 
-char * test_get_IP() {
+char * get_IP() {
      long lIP = gethostid();
 
      // create an in_addr struct (that contains the address)

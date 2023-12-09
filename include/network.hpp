@@ -10,7 +10,7 @@
 
 void launch_test_server();
 
-char * test_get_IP();
+char * get_IP();
 
 // returns true if everything went ok
 Result init_network();
