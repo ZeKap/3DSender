@@ -58,7 +58,7 @@ int launch_server()
           println(0, "Avec errno %d", errno);
      }
 
-     println(0, "Le serveur écoute sur le port %d", PORT);
+     //println(0, "Le serveur écoute sur le port %d", PORT);
 
      return sock_server;
 }
