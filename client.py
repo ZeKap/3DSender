@@ -26,12 +26,6 @@ class Keys(IntFlag):
     KEY_CPAD_UP = 2**30
     KEY_CPAD_DOWN = 2**31
 
-# keys = Keys(3)
-# print("\033c", end="")
-# for key in keys:
-#     print(key.name)
-# exit(0)
-
 # Create a TCP/IP socket
 sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 
@@ -48,7 +42,7 @@ try:
             break
         int_data = int.from_bytes(data, byteorder='little', signed=False)
         keys = Keys(int_data)
-        print("\033c", end="")
+        #print("\033c", end="")
         print(keys)
         for key in keys:
             print(key.name)

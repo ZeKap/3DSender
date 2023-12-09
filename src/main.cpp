@@ -69,12 +69,16 @@ int main()
 	// Main loop
 	while (aptMainLoop() && !should_exit())
 	{
+		static u32 last_held = 0;
 		hidScanInput();				  // check for new input
 		u32 kheld = hidKeysHeld(); // get input
 
 		print_stuff_to_screen(IP);
-		// char[] => char*
-		write_client_msg(sock_client_fd, &kheld, 4);
+		
+		if(kheld != last_held) {
+			write_client_msg(sock_client_fd, &kheld, 4);
+			last_held = kheld;
+		}
 
 		gspWaitForVBlank(); // frame limiter
 
