@@ -2,7 +2,8 @@
 
 size_t current_max_line = 5;
 
-void print(const size_t line, const size_t column, const char * __restrict format, ...) {
+void print(const size_t line, const size_t column, const char *__restrict format, ...)
+{
     va_list args;
     va_start(args, format);
 
@@ -10,11 +11,12 @@ void print(const size_t line, const size_t column, const char * __restrict forma
     vprintf(format, args);
 
     va_end(args);
-    if(line >= current_max_line)
+    if (line >= current_max_line)
         current_max_line = line + 1;
 }
 
-void println(const size_t column, const char * __restrict format, ...) {
+void println(const size_t column, const char *__restrict format, ...)
+{
     va_list args;
     va_start(args, format);
 

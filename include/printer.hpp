@@ -10,12 +10,12 @@
 
 /**
  * @brief Displays a line of text at the specified line and column.
-*/
-void print(const size_t line, const size_t column, const char * __restrict str, ...);
+ */
+void print(const size_t line, const size_t column, const char *__restrict str, ...);
 
 /**
  * @brief Displays a line of text at the specified column, after the others.
-*/
-void println(const size_t column, const char * __restrict str, ...);
+ */
+void println(const size_t column, const char *__restrict str, ...);
 
 #endif
