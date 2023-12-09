@@ -32,10 +32,10 @@ int main()
 		print(4, 0, "Selected: %ld", selected);
 		print(7, 0, "---------------------");
 
-		print_line(8, 2, "%c Option 1", selected == 0 ? '>' : ' ');
-		print_line(9, 2, "%c Option 2", selected == 1 ? '>' : ' ');
-		print_line(10, 2, "%c Option 3", selected == 2 ? '>' : ' ');
-		print_line(11, 2, "%c Option 4", selected == 3 ? '>' : ' ');
+		print(8, 2, "%c Option 1", selected == 0 ? '>' : ' ');
+		print(9, 2, "%c Option 2", selected == 1 ? '>' : ' ');
+		print(10, 2, "%c Option 3", selected == 2 ? '>' : ' ');
+		print(11, 2, "%c Option 4", selected == 3 ? '>' : ' ');
 
 		u32 kpressed = hidKeysDown();
 
