@@ -14,7 +14,10 @@ int main()
 	size_t frames = 0;
 	size_t selected = 0;
 
-	init_network();
+	auto res = init_network();
+	if (res != 0) {
+		print(6, 0, "Network init failed: %i", res);
+	}
 
 	char * IP = test_get_IP();
 	//launch_test_server();

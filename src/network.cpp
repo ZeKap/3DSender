@@ -5,11 +5,19 @@
 #define MAX_CONNECTIONS 5
 #define PORT 8000
 
-bool init_network() {
-     acInit();
-     socInit((u32 *)memalign(0x1000, 0x100000), 0x100000);
-     // one day we'll use the bool.... one day
-     return true;
+Result init_network() {
+     Result res;
+     res = acInit();
+     if (res != 0) {
+          return res;
+     }
+
+     res = socInit((u32 *)memalign(0x1000, 0x100000), 0x100000);
+     if (res != 0) {
+          return res;
+     }
+
+     return 0;
 }
 
 void launch_test_server() {
