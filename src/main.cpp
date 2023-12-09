@@ -1,5 +1,6 @@
 #include <string.h>
 #include <3ds.h>
+#include <malloc.h>
 #include "printer.hpp"
 #include "network.hpp"
 
@@ -14,8 +15,10 @@ int main()
 	size_t selected = 0;
 
 	acInit();
+	socInit((u32 *)memalign(0x1000, 0x100000), 0x100000);
 
-	launch_test_server();
+	char * IP = test_get_IP();
+	//launch_test_server();
 
 	// Main loop
 	while (aptMainLoop())
@@ -30,6 +33,7 @@ int main()
 		print(2, 0, "Frame: %d", frames);
 		print(3, 0, "Press START to exit.");
 		print(4, 0, "Selected: %ld", selected);
+		print(5, 0, "IP: %s", IP);
 		print(7, 0, "---------------------");
 
 		print(8, 2, "%c Option 1", selected == 0 ? '>' : ' ');

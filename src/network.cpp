@@ -65,3 +65,16 @@ void launch_test_server() {
          println(0, "Avec errno %d", errno);
     }
 }
+
+char * test_get_IP() {
+     long lIP = gethostid();
+
+     // create an in_addr struct (that contains the address)
+     in_addr an_address;
+     // set its s_addr field to the IP
+     an_address.s_addr = lIP;
+     // get the string representation from the struct
+     char * strIP = inet_ntoa(an_address);
+     
+     return strIP;
+}

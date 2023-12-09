@@ -10,4 +10,6 @@
 
 void launch_test_server();
 
+char * test_get_IP();
+
 #endif
