@@ -15,7 +15,7 @@ int main()
 
 	acInit();
 
-	je_fonctionne();
+	launch_test_server();
 
 	// Main loop
 	while (aptMainLoop())

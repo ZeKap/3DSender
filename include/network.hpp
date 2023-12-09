@@ -8,6 +8,6 @@
 #include <string.h>
 #include "printer.hpp"
 
-void je_fonctionne();
+void launch_test_server();
 
 #endif
