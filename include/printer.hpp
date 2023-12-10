@@ -23,4 +23,9 @@ void println(const size_t column, const char *__restrict str, ...);
  */
 void set_current_max_line(size_t line);
 
+/**
+ * @brief clear all what was displayed on screen
+ */
+void clear_screen();
+
 #endif

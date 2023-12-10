@@ -31,3 +31,9 @@ void set_current_max_line(size_t line)
 {
     current_max_line = line;
 }
+
+void clear_screen()
+{
+    consoleClear();
+    set_current_max_line(0);
+}
