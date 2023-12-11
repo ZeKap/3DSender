@@ -8,10 +8,10 @@
  */
 typedef struct inputData
 {
-    u32 buttons;
-    circlePosition circlePad;
-    accelVector accelerometer;
-    angularRate gyro;
+	u32 buttons;
+	circlePosition circlePad;
+	accelVector accelerometer;
+	angularRate gyro;
 };
 
 bool operator==(const inputData &left, const inputData &right);
