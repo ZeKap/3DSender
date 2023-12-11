@@ -58,7 +58,7 @@ int launch_server()
           println(0, "Avec errno %d", errno);
      }
 
-     //println(0, "Le serveur écoute sur le port %d", PORT);
+     // println(0, "Le serveur écoute sur le port %d", PORT);
 
      return sock_server;
 }
@@ -129,4 +129,14 @@ char *get_IP()
      char *strIP = inet_ntoa(an_address);
 
      return strIP;
+}
+
+void send_new_inputs_to_client(int sock_client_fd, u32 kheld)
+{
+     static u32 last_held = 0; // store last keys change
+     if (kheld != last_held)
+     {
+          write_client_msg(sock_client_fd, &kheld, 4);
+          last_held = kheld;
+     }
 }

@@ -37,3 +37,22 @@ void clear_screen()
     consoleClear();
     set_current_max_line(0);
 }
+
+void print_connected_header(char *IP)
+{
+    print(1, 0, "Hello world!");
+
+    print(2, 0, "Press START to exit.");
+    print(3, 0, "IP: %s", IP);
+}
+
+void print_keys(u32 kheld)
+{
+    static u32 last_held = 0; // store last keys change
+    if (kheld != last_held)
+    {
+        print(4, 0, "                    ");
+        print(4, 0, "%u", kheld);
+        last_held = kheld;
+    }
+}

@@ -24,8 +24,18 @@ void println(const size_t column, const char *__restrict str, ...);
 void set_current_max_line(size_t line);
 
 /**
- * @brief clear all what was displayed on screen
+ * @brief clear everything that was displayed on screen and reset line counter
  */
 void clear_screen();
+
+/**
+ * @brief print Hello World and the smallest interface ever on a 3DS
+ */
+void print_connected_header(char *IP);
+
+/**
+ * @brief displays keys given in parameters
+ */
+void print_keys(u32 kheld);
 
 #endif
