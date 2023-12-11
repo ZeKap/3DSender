@@ -3,35 +3,7 @@
 #include <malloc.h>
 #include "printer.hpp"
 #include "network.hpp"
-// on foutra ca dans un fichier* séparé yep
-
-typedef struct inputData
-{
-	u32 buttons;
-	circlePosition circlePad;
-	accelVector accelerometer;
-	angularRate gyro;
-};
-
-bool operator==(const inputData &left, const inputData &right)
-{
-	return (left.buttons == right.buttons && left.circlePad == right.circlePad && left.accelerometer == right.accelerometer && left.gyro == right.gyro);
-}
-
-bool operator==(const circlePosition &left, const circlePosition &right)
-{
-	return left.dx == right.dx && left.dy == right.dy;
-}
-
-bool operator==(const accelVector &left, const accelVector &right)
-{
-	return left.x == right.x && left.y == right.y && left.z == right.z;
-}
-
-bool operator==(const angularRate &left, const angularRate &right)
-{
-	return left.x == right.x && left.y == right.y && left.z == right.z;
-}
+#include "input_data.hpp"
 
 void print_connected_header(char *IP)
 {
@@ -107,7 +79,9 @@ int main()
 		{
 			print_connected_header(IP);
 			print_keys_held(current_commands.buttons);
+
 			send_new_inputs_to_client(sock_client_fd, current_commands.buttons);
+
 			old_commands = current_commands;
 		}
 
