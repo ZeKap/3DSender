@@ -3,6 +3,35 @@
 #include <malloc.h>
 #include "printer.hpp"
 #include "network.hpp"
+// on foutra ca dans un fichier* séparé yep
+
+typedef struct inputData
+{
+	u32 buttons;
+	circlePosition circlePad;
+	accelVector accelerometer;
+	angularRate gyro;
+};
+
+bool operator==(const inputData &left, const inputData &right)
+{
+	return (left.buttons == right.buttons && left.circlePad == right.circlePad && left.accelerometer == right.accelerometer && left.gyro == right.gyro);
+}
+
+bool operator==(const circlePosition &left, const circlePosition &right)
+{
+	return left.dx == right.dx && left.dy == right.dy;
+}
+
+bool operator==(const accelVector &left, const accelVector &right)
+{
+	return left.x == right.x && left.y == right.y && left.z == right.z;
+}
+
+bool operator==(const angularRate &left, const angularRate &right)
+{
+	return left.x == right.x && left.y == right.y && left.z == right.z;
+}
 
 void print_connected_header(char *IP)
 {
@@ -12,12 +41,13 @@ void print_connected_header(char *IP)
 	print(3, 0, "IP: %s", IP);
 }
 
-void print_keys_held(u32 kheld) {
-	static u32 last_held = 0;  // store last keys change
+void print_keys_held(u32 kheld)
+{
+	static u32 last_held = 0; // store last keys change
 	if (kheld != last_held)
 	{
 		print(4, 0, "                    ");
-		print(4,0, "%u", kheld);
+		print(4, 0, "%u", kheld);
 		last_held = kheld;
 	}
 }
@@ -37,7 +67,7 @@ bool should_exit()
 
 void send_new_inputs_to_client(int sock_client_fd, u32 kheld)
 {
-	static u32 last_held = 0;  // store last keys change
+	static u32 last_held = 0; // store last keys change
 	if (kheld != last_held)
 	{
 		write_client_msg(sock_client_fd, &kheld, 4);
@@ -64,16 +94,22 @@ int main()
 	int sock_client_fd = accept_client(sock_server_fd);
 	consoleClear();
 
+	inputData old_commands, current_commands;
+
 	// Main loop
 	while (aptMainLoop() && !should_exit())
 	{
 		hidScanInput(); // check for new input
-		u32 kheld = hidKeysHeld();
+		current_commands.buttons = hidKeysHeld();
+		hidCircleRead(&current_commands.circlePad); // get circlePad Position
 
-		send_new_inputs_to_client(sock_client_fd, kheld);
-
-		print_connected_header(IP);
-		print_keys_held(kheld);
+		if (!(current_commands == old_commands))
+		{
+			print_connected_header(IP);
+			print_keys_held(current_commands.buttons);
+			send_new_inputs_to_client(sock_client_fd, current_commands.buttons);
+			old_commands = current_commands;
+		}
 
 		// Flush and swap frame-buffers
 		gfxFlushBuffers();
