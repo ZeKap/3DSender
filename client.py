@@ -61,7 +61,9 @@ try:
         parsed_data = InputData.from_buffer_copy(data)
         keys = Keys(parsed_data.buttons)
         print("\033c", end="")
-        print(keys)
+        print("circle pad: x=%s,y=%s" % (parsed_data.circlePad.dx, parsed_data.circlePad.dy))
+        print("accel: x=%s,y=%s z=%s" % (parsed_data.accelerometer.x, parsed_data.accelerometer.y, parsed_data.accelerometer.z))
+        print("gyro: x=%s,y=%s z=%s" % (parsed_data.gyro.x, parsed_data.gyro.y, parsed_data.gyro.z))
         for key in keys:
             print(key.name)
 finally:
