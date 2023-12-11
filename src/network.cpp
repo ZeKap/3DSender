@@ -133,7 +133,16 @@ char *get_IP()
 
 void send_new_inputs_to_client(int sock_client_fd, inputData input)
 {
-	// TODO: send input
-	// write_client_msg(sock_client_fd, &kheld, 4);
-	// last_held = kheld;
+	write(sock_client_fd, &input.buttons, 4);
+
+	write(sock_client_fd, &input.circlePad.dx, 2);
+	write(sock_client_fd, &input.circlePad.dy, 2);
+
+	write(sock_client_fd, &input.accelerometer.x, 2);
+	write(sock_client_fd, &input.accelerometer.y, 2);
+	write(sock_client_fd, &input.accelerometer.z, 2);
+
+	write(sock_client_fd, &input.gyro.x, 2);
+	write(sock_client_fd, &input.gyro.y, 2);
+	write(sock_client_fd, &input.gyro.z, 2);
 }

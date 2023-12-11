@@ -1,5 +1,6 @@
 import socket
 from enum import IntFlag
+import ctypes as ct
 
 class Keys(IntFlag):
     KEY_A = 2**0
@@ -26,6 +27,22 @@ class Keys(IntFlag):
     KEY_CPAD_UP = 2**30
     KEY_CPAD_DOWN = 2**31
 
+class CirclePosition(ct.LittleEndianStructure):
+    _pack_ = 1
+    _fields_ = (('dx', ct.c_int16),('dy', ct.c_int16),)
+
+class AccelVector(ct.LittleEndianStructure):
+    _pack_ = 1
+    _fields_ = (('x', ct.c_int16),('y', ct.c_int16),('z', ct.c_int16),)
+
+class AngularRate(ct.LittleEndianStructure):
+    _pack_ = 1
+    _fields_ = (('x', ct.c_int16),('y', ct.c_int16),('z', ct.c_int16),)
+
+class InputData(ct.LittleEndianStructure):
+    _pack_ = 1
+    _fields_ = (('buttons', ct.c_uint32),('circlePad', CirclePosition),('accelerometer', AccelVector),('gyro', AngularRate),)
+
 # Create a TCP/IP socket
 sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 
@@ -37,12 +54,13 @@ sock.connect(server_address)
 try:
     # Receive data from the 3DS server
     while True:
-        data = sock.recv(4)
+        data = sock.recv(4+2*2+2*3+2*3, socket.MSG_WAITALL)
         if not data:
             break
-        int_data = int.from_bytes(data, byteorder='little', signed=False)
-        keys = Keys(int_data)
-        #print("\033c", end="")
+        
+        parsed_data = InputData.from_buffer_copy(data)
+        keys = Keys(parsed_data.buttons)
+        print("\033c", end="")
         print(keys)
         for key in keys:
             print(key.name)
