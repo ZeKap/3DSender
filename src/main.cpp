@@ -49,9 +49,12 @@ int main()
 		if (!(current_commands == old_commands))
 		{
 			print_connected_header(IP);
-			print_keys(current_commands.buttons);
+			print_keys(current_commands);
 
-			send_new_inputs_to_client(sock_client_fd, current_commands.buttons);
+			// now it's time to PACK
+			// wait before
+			// need to edit some functs to git the struct in input
+			send_new_inputs_to_client(sock_client_fd, current_commands);
 
 			old_commands = current_commands;
 		}

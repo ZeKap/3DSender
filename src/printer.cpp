@@ -46,13 +46,14 @@ void print_connected_header(char *IP)
     print(3, 0, "IP: %s", IP);
 }
 
-void print_keys(u32 kheld)
+void print_keys(inputData input)
 {
-    static u32 last_held = 0; // store last keys change
-    if (kheld != last_held)
-    {
-        print(4, 0, "                    ");
-        print(4, 0, "%u", kheld);
-        last_held = kheld;
-    }
+    print(4, 0, "                    ");
+    print(4, 0, "buttons: %u", input.buttons);
+    print(5, 0, "                    ");
+    print(5, 0, "circle pad: x:%s, y:%s", input.circlePad.dx, input.circlePad.dy);
+    print(6, 0, "                    ");
+    print(4, 0, "accel: x:%s, y:%s, z:%s", input.accelerometer.x, input.accelerometer.y, input.accelerometer.z);
+    print(7, 0, "                    ");
+    print(4, 0, "accel: x:%s, y:%s, z:%s", input.gyro.x, input.gyro.y, input.gyro.z);
 }

@@ -131,12 +131,9 @@ char *get_IP()
      return strIP;
 }
 
-void send_new_inputs_to_client(int sock_client_fd, u32 kheld)
+void send_new_inputs_to_client(int sock_client_fd, inputData input)
 {
-     static u32 last_held = 0; // store last keys change
-     if (kheld != last_held)
-     {
-          write_client_msg(sock_client_fd, &kheld, 4);
-          last_held = kheld;
-     }
+     // TODO: send input
+     //write_client_msg(sock_client_fd, &kheld, 4);
+     //last_held = kheld;
 }

@@ -7,6 +7,7 @@
 #include <stdio.h>
 #include <stdarg.h>
 #include <stdio.h>
+#include "input_data.hpp"
 
 /**
  * @brief Displays a line of text at the specified line and column.
@@ -36,6 +37,6 @@ void print_connected_header(char *IP);
 /**
  * @brief displays keys given in parameters
  */
-void print_keys(u32 kheld);
+void print_keys(inputData input);
 
 #endif

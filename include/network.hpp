@@ -7,6 +7,7 @@
 #include <iostream>
 #include <string.h>
 #include "printer.hpp"
+#include "input_data.hpp"
 
 int launch_server();
 int accept_client(int sock_server);
@@ -15,7 +16,7 @@ bool write_client_msg(int sock_client, const void *data, size_t size);
 
 char *get_IP();
 
-void send_new_inputs_to_client(int sock_client_fd, u32 kheld);
+void send_new_inputs_to_client(int sock_client_fd, inputData input);
 
 // returns true if everything went ok
 Result init_network();
