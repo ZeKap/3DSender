@@ -48,12 +48,12 @@ void print_connected_header(char *IP)
 
 void print_keys(inputData input)
 {
-	print(4, 0, "                    ");
+	print(4, 0, "                                ");
 	print(4, 0, "buttons: %u", input.buttons);
-	print(5, 0, "                    ");
-	print(5, 0, "circle pad: x:%s, y:%s", input.circlePad.dx, input.circlePad.dy);
-	print(6, 0, "                    ");
-	print(4, 0, "accel: x:%s, y:%s, z:%s", input.accelerometer.x, input.accelerometer.y, input.accelerometer.z);
-	print(7, 0, "                    ");
-	print(4, 0, "accel: x:%s, y:%s, z:%s", input.gyro.x, input.gyro.y, input.gyro.z);
+	print(5, 0, "                                ");
+	print(5, 0, "circle pad: x:%i, y:%i", input.circlePad.dx, input.circlePad.dy);
+	print(6, 0, "                                ");
+	print(6, 0, "accel: x:%i, y:%i, z:%i", input.accelerometer.x, input.accelerometer.y, input.accelerometer.z);
+	print(7, 0, "                                ");
+	print(7, 0, "gyro: x:%i, y:%i, z:%i", input.gyro.x, input.gyro.y, input.gyro.z);
 }
