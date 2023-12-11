@@ -6,7 +6,7 @@
 /**
  * @brief all the data we want to send from the inputs of the console to the client
  */
-typedef struct inputData
+struct inputData
 {
 	u32 buttons;
 	circlePosition circlePad;
