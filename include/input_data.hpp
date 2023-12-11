@@ -21,4 +21,4 @@ bool operator==(const circlePosition &left, const circlePosition &right);
 bool operator==(const accelVector &left, const accelVector &right);
 
 bool operator==(const angularRate &left, const angularRate &right);
-#endif INPUT_DATA
+#endif // INPUT_DATA
