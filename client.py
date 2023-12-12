@@ -27,21 +27,38 @@ class Keys(IntFlag):
     KEY_CPAD_UP = 2**30
     KEY_CPAD_DOWN = 2**31
 
+# https://gist.github.com/iTrooz/07200f67b3252015222e04044076596e
+def binattrs(cls):
+    cls._fields_ = tuple(cls.__annotations__.items())
+    return cls
+
+@binattrs
 class CirclePosition(ct.LittleEndianStructure):
     _pack_ = 1
-    _fields_ = (('dx', ct.c_int16),('dy', ct.c_int16),)
+    dx: ct.c_int16
+    dy: ct.c_int16
 
+@binattrs
 class AccelVector(ct.LittleEndianStructure):
     _pack_ = 1
-    _fields_ = (('x', ct.c_int16),('y', ct.c_int16),('z', ct.c_int16),)
+    x: ct.c_int16
+    y: ct.c_int16
+    z: ct.c_int16
 
+@binattrs
 class AngularRate(ct.LittleEndianStructure):
     _pack_ = 1
-    _fields_ = (('x', ct.c_int16),('y', ct.c_int16),('z', ct.c_int16),)
+    x: ct.c_int16
+    y: ct.c_int16
+    z: ct.c_int16
 
+@binattrs
 class InputData(ct.LittleEndianStructure):
     _pack_ = 1
-    _fields_ = (('buttons', ct.c_uint32),('circlePad', CirclePosition),('accelerometer', AccelVector),('gyro', AngularRate),)
+    buttons: ct.c_uint32
+    circlePad: CirclePosition
+    accelerometer: AccelVector
+    gyro: AngularRate
 
 # Create a TCP/IP socket
 sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
