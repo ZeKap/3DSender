@@ -1,16 +1,16 @@
 #include <QApplication>
-#include <sys/socket.h>
-#include <arpa/inet.h>
 #include <unistd.h>
 #include <iostream>
 #include "MyWindow.h"
+#include "network.hpp"
+#include "input_data.hpp"
 
 #define LENGTH_INPUTS 20
 
 void exitErreur(const char *msg)
 {
-    perror(msg);
-    exit(EXIT_FAILURE);
+	perror(msg);
+	exit(EXIT_FAILURE);
 }
 
 int main(int argc, char *argv[])
@@ -24,29 +24,25 @@ int main(int argc, char *argv[])
 	return a.exec();
 	*/
 
-	// prepare socket on host to connect to server later
-	int sock_client = socket(AF_INET, SOCK_STREAM, 0);
-	// create struct of server to connect
-	struct sockaddr_in sockaddr_serveur;
-	sockaddr_serveur.sin_family = AF_INET;
-	inet_aton("192.168.1.99", &sockaddr_serveur.sin_addr);
-	sockaddr_serveur.sin_port = htons(8000);
-
-	// try to connect
-	if(connect(sock_client, (struct sockaddr *)&sockaddr_serveur, sizeof(sockaddr_serveur)) == -1)
-		exitErreur("connect");
+	int sock_client = connectTo("192.168.1.99", 8000);
+	if(sock_client < 0)
+	{
+		exitErreur("problem connecting");
+	}
 
 	// vars used in loop
 	int still_working;
 	char inputs[LENGTH_INPUTS];
 
-	while(true)
+	while (true)
 	{
 		// wait for new infos to read and store them;
 		still_working = read(sock_client, inputs, sizeof(inputs));
 		// exit if error or socket closed
-		if(still_working == -1) exitErreur("read");
-		if(!still_working) break;
+		if (still_working == -1)
+			exitErreur("read");
+		if (!still_working)
+			break;
 
 		std::cout << inputs << std::endl;
 	}

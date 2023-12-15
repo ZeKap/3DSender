@@ -6,7 +6,7 @@ set(CMAKE_CXX_STANDARD 20)
 find_package(Qt6 COMPONENTS Core Widgets)
 
 # We need to add .h files (at least those that define a custom Qt class), see https://stackoverflow.com/a/14011060
-qt_add_executable(${PROJECT_NAME} src/main.cpp src/MyWindow.cpp include/MyWindow.h)
+qt_add_executable(${PROJECT_NAME} src/main.cpp src/MyWindow.cpp src/network.cpp include/MyWindow.h include/input_data.hpp include/network.hpp)
 set_target_properties(${PROJECT_NAME} PROPERTIES AUTOMOC ON)
 target_include_directories(${PROJECT_NAME} PUBLIC include)
 
