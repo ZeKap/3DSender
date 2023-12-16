@@ -20,8 +20,26 @@ int connectTo(const char *ipAdress, int port)
 	return sock_client;
 }
 
-int getInputs(int socket_client, inputData *inputs)
+int getInputs(int socket, inputData *inputs)
 {
+#define readOrReturn(var, size)    \
+	ok = read(socket, &var, size); \
+	if (ok <= 0)                   \
+	return ok
+
+	// var to store state of every read
+	int ok;
+
 	// wait for new infos to read and store them;
-	return read(socket_client, inputs, sizeof(inputs));
+	readOrReturn(inputs->buttons, 4);
+	readOrReturn(inputs->circlePad.dx, 2);
+	readOrReturn(inputs->circlePad.dy, 2);
+	readOrReturn(inputs->accelerometer.x, 2);
+	readOrReturn(inputs->accelerometer.y, 2);
+	readOrReturn(inputs->accelerometer.z, 2);
+	readOrReturn(inputs->gyro.x, 2);
+	readOrReturn(inputs->gyro.y, 2);
+	readOrReturn(inputs->gyro.z, 2);
+
+	return 1;
 }

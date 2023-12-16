@@ -41,7 +41,10 @@ int main(int argc, char *argv[])
 		if (!still_working)
 			break;
 
-		std::cout << "buttons: " << inputs.buttons << std::endl;
+		std::cout << "buttons: " << inputs.buttons << std::endl
+				  << "circle pad: " << inputs.circlePad.dx << ", " << inputs.circlePad.dy << std::endl
+				  << "accel: " << inputs.accelerometer.x << ", " << inputs.accelerometer.y << ", " << inputs.accelerometer.z << std::endl
+				  << "gyro: " << inputs.gyro.x << ", " << inputs.gyro.y << ", " << inputs.gyro.z << std::endl;
 	}
 
 	close(sock_client);
