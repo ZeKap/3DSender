@@ -5,7 +5,7 @@
 
 int connectTo(const char *ipAdress, int port)
 {
-    // prepare socket on host to connect to server later
+	// prepare socket on host to connect to server later
 	int sock_client = socket(AF_INET, SOCK_STREAM, 0);
 	// create struct of server to connect
 	struct sockaddr_in sockaddr_serveur;
@@ -16,12 +16,12 @@ int connectTo(const char *ipAdress, int port)
 	// try to connect
 	if (connect(sock_client, (struct sockaddr *)&sockaddr_serveur, sizeof(sockaddr_serveur)) == -1)
 		return -1;
-    
-    return sock_client;
+
+	return sock_client;
 }
 
 int getInputs(int socket_client, inputData *inputs)
 {
-    // wait for new infos to read and store them;
-    return read(socket_client, inputs, sizeof(inputs));
+	// wait for new infos to read and store them;
+	return read(socket_client, inputs, sizeof(inputs));
 }

@@ -6,11 +6,12 @@
 
 class MyWindow : public QWidget
 {
-    Q_OBJECT
+	Q_OBJECT
 public:
-    explicit MyWindow(QWidget *parent = 0);
+	explicit MyWindow(QWidget *parent = 0);
+
 private:
-    QPushButton *m_button;
+	QPushButton *m_button;
 };
 
-#endif //MYWINDOW_H
+#endif // MYWINDOW_H

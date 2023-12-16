@@ -25,7 +25,7 @@ int main(int argc, char *argv[])
 	*/
 
 	int sock_client = connectTo("192.168.1.99", 8000);
-	if(sock_client < 0)
+	if (sock_client < 0)
 	{
 		exitErreur("problem connecting");
 	}
