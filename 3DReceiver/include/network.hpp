@@ -13,6 +13,6 @@ int connectTo(const char *ipAdress, int port);
  * @brief wait for inputs and put them in the input struct given
  * @return 0 if all clear
  */
-int getInputs(int *socket_client, inputData *inputs);
+int getInputs(int socket_client, inputData *inputs);
 
 #endif

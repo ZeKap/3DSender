@@ -30,21 +30,18 @@ int main(int argc, char *argv[])
 		exitErreur("problem connecting");
 	}
 
-	// vars used in loop
-	int still_working;
-	char inputs[LENGTH_INPUTS];
+	inputData inputs;
 
 	while (true)
 	{
-		// wait for new infos to read and store them;
-		still_working = read(sock_client, inputs, sizeof(inputs));
+		int still_working = getInputs(sock_client, &inputs);
 		// exit if error or socket closed
 		if (still_working == -1)
-			exitErreur("read");
+			exitErreur("getInputs");
 		if (!still_working)
 			break;
 
-		std::cout << inputs << std::endl;
+		std::cout << "buttons: " << inputs.buttons << std::endl;
 	}
 
 	close(sock_client);

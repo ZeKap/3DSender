@@ -1,5 +1,6 @@
 #include <sys/socket.h>
 #include <arpa/inet.h>
+#include <unistd.h>
 #include "network.hpp"
 
 int connectTo(const char *ipAdress, int port)
@@ -17,4 +18,10 @@ int connectTo(const char *ipAdress, int port)
 		return -1;
     
     return sock_client;
+}
+
+int getInputs(int socket_client, inputData *inputs)
+{
+    // wait for new infos to read and store them;
+    return read(socket_client, inputs, sizeof(inputs));
 }
