@@ -33,4 +33,9 @@ MyWindow::MyWindow(QWidget *parent) : QWidget(parent)
 		sig_connectToIp(ui.inputIP->text(), ui.inputPort->text().toInt(nullptr));
 	});
 
+	QObject::connect(&this->worker, &Worker::sig_receiveData, this, &MyWindow::slot_receiveData);
+}
+
+void MyWindow::slot_receiveData(inputData input) {
+    std::cout << input.buttons << std::endl;
 }

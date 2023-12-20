@@ -23,6 +23,8 @@ private:
 	QThread workerThread;
 signals:
 	void sig_connectToIp(const QString &ip, int port);
+public slots:
+	void slot_receiveData(inputData input);
 };
 
 #endif // MYWINDOW_H
