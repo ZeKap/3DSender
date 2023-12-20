@@ -13,7 +13,7 @@ public:
 	explicit MyWindow(QWidget *parent = 0);
 
 private:
-	QPushButton *m_button;
+	Ui::root window;
 };
 
 #endif // MYWINDOW_H
