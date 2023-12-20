@@ -3,3 +3,4 @@ build/
 3DSender.*
 mybuild.sh
 .DS_Store
+out

@@ -1,0 +1,28 @@
+name: Build
+
+on:
+  push:
+    branches: ["*"]
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  receiver:
+    runs-on: ubuntu-22.04
+    name: 3DReceiver (Linux)
+    steps:
+    - name: 🧰 Checkout
+      uses: actions/checkout@v3
+
+    - name: Build project using docker
+      run: |
+        cd 3DReceiver
+        docker buildx build . -f dist/Dockerfile --progress=plain --output out
+
+    # - name: Upload binary
+    #   uses: actions/upload-artifact@v3
+    #   with:
+    #     if-no-files-found: error
+    #     name: 3DReceiver binary
+    #     path: |
+    #       3DReceiver/out/3DReceiver
