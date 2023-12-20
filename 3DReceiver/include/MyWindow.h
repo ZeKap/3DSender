@@ -22,7 +22,7 @@ private:
 	Worker worker;
 	QThread workerThread;
 signals:
-	void connectToIp(const QString &ip, int port);
+	void sig_connectToIp(const QString &ip, int port);
 };
 
 #endif // MYWINDOW_H

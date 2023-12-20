@@ -16,7 +16,7 @@ MyWindow::MyWindow(QWidget *parent) : QWidget(parent)
 	ui.setupUi(this);
 	this->initThread();
 
-	QObject::connect(this, &MyWindow::connectToIp, &this->worker, &Worker::connectToIp);
+	QObject::connect(this, &MyWindow::sig_connectToIp, &this->worker, &Worker::slot_connectToIp);
 
 	QObject::connect(ui.inputIP, &QLineEdit::textEdited, [=](const QString &ip) {
 		char buf[4];
@@ -30,6 +30,7 @@ MyWindow::MyWindow(QWidget *parent) : QWidget(parent)
 	QObject::connect(ui.buttonStart, &QPushButton::clicked, [=](bool checked) {
 		ui.buttonStart->setText(QString("Stop"));
 		
-		connectToIp(ui.inputIP->text(), ui.inputPort->text().toInt(nullptr));
+		sig_connectToIp(ui.inputIP->text(), ui.inputPort->text().toInt(nullptr));
 	});
+
 }
