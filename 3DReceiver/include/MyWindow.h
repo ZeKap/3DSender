@@ -3,6 +3,8 @@
 
 #include <QWidget>
 #include <QPushButton>
+#include <QObject>
+#include <arpa/inet.h>
 
 #include "ui_template.h"
 
@@ -13,7 +15,7 @@ public:
 	explicit MyWindow(QWidget *parent = 0);
 
 private:
-	Ui::root window;
+	Ui::root ui;
 };
 
 #endif // MYWINDOW_H
