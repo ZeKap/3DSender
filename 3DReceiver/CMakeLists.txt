@@ -11,8 +11,9 @@ set(CMAKE_AUTORCC ON)
 
 # We need to add .h files (at least those that define a custom Qt class), see https://stackoverflow.com/a/14011060
 qt_add_executable(${PROJECT_NAME}
-                    src/main.cpp src/MyWindow.cpp src/network.cpp
-                    include/MyWindow.h include/input_data.hpp include/network.hpp include/template.ui
+                    src/main.cpp src/MyWindow.cpp src/network.cpp src/worker.cpp
+                    include/MyWindow.h include/input_data.hpp include/network.hpp include/worker.hpp
+                    include/template.ui
                  )
 set_target_properties(${PROJECT_NAME} PROPERTIES AUTOMOC ON)
 target_include_directories(${PROJECT_NAME} PUBLIC include)
