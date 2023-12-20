@@ -4,6 +4,8 @@
 #include <QWidget>
 #include <QPushButton>
 
+#include "ui_template.h"
+
 class MyWindow : public QWidget
 {
 	Q_OBJECT
