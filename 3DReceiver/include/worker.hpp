@@ -10,7 +10,7 @@ class Worker : public QObject {
 
 public slots:
     // called by main thread to tell the worker where to connect
-    void slot_connectToIp(const QString &ip, int port);
+    void slot_connectAndStart(const QString &ip, int port);
 
 signals:
     // called by worker when it has data to transmit

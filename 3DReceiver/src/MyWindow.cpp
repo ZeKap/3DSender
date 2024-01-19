@@ -16,7 +16,7 @@ MyWindow::MyWindow(QWidget *parent) : QWidget(parent)
 	ui.setupUi(this);
 	this->initThread();
 
-	QObject::connect(this, &MyWindow::sig_connectToIp, &this->worker, &Worker::slot_connectToIp);
+	QObject::connect(this, &MyWindow::sig_connectToIp, &this->worker, &Worker::slot_connectAndStart);
 
 	QObject::connect(ui.inputIP, &QLineEdit::textEdited, [=](const QString &ip) {
 		char buf[4];

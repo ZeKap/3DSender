@@ -1,14 +1,20 @@
 #include <iostream>
 
 #include "worker.hpp"
+#include "network.hpp"
 
-void Worker::slot_connectToIp(const QString &ip, int port) {
-    std::cout << "uwu i'm supposed to connect now" << std::endl;
+void Worker::slot_connectAndStart(const QString &ip, int port) {
+    // connect to client ip
+    int sock_client = connectTo(ip.toStdString().c_str(), port);
+    inputData inputs;
+
     while (true) {
-        auto input = inputData {
-            .buttons = 1,
-        };
+        // if error while trying to read in the socket, we log and break
+        if(getInputs(sock_client, &inputs) != 1) {
+            std::cerr << "Connection stopped" << std::endl;
+            break;
+        }
         // we do NOT receive data, we sent it
-        sig_receiveData(input);
+        sig_receiveData(inputs);
     }
 }
