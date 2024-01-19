@@ -5,6 +5,7 @@
 #include<QString>
 #include "input_data.hpp"
 
+// Class responsible for sending and receiving socket data
 class Worker : public QObject {
     Q_OBJECT
 

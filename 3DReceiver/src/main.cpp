@@ -13,10 +13,14 @@ void exitErreur(const char *msg)
 
 int main(int argc, char *argv[])
 {
+	// Qt app
 	QApplication a(argc, argv);
+	// Main Window
 	MyWindow w;
 
+	// Display the main window
 	w.show();
 
+	// Execute main app
 	return a.exec();
 }

@@ -5,12 +5,12 @@
 
 void Worker::slot_connectAndStart(const QString &ip, int port) {
     // connect to client ip
-    int sock_client = connectTo(ip.toStdString().c_str(), port);
+    int sock_client = network::connectTo(ip.toStdString().c_str(), port);
     inputData inputs;
 
     while (true) {
         // if error while trying to read in the socket, we log and break
-        if(getInputs(sock_client, &inputs) != 1) {
+        if(network::getInputs(sock_client, &inputs) != 1) {
             std::cerr << "Connection stopped" << std::endl;
             break;
         }
