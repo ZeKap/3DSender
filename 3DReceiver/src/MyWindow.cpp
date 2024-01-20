@@ -41,6 +41,21 @@ MyWindow::MyWindow(QWidget *parent) : QWidget(parent)
 	QObject::connect(&this->worker, &Worker::sig_receiveData, this, &MyWindow::slot_receiveData);
 }
 
-void MyWindow::slot_receiveData(inputData input) {
-    std::cout << input.buttons << std::endl;
+void MyWindow::slot_receiveData(inputData inputs) {
+    std::cout << inputs.buttons << std::endl;
+	ui.outputAccelX->setText(QString::number(inputs.accelerometer.x));
+	ui.outputAccelY->setText(QString::number(inputs.accelerometer.y));
+	ui.outputAccelZ->setText(QString::number(inputs.accelerometer.z));
+	ui.outputGyroX->setText(QString::number(inputs.gyro.x));
+	ui.outputGyroY->setText(QString::number(inputs.gyro.y));
+	ui.outputGyroZ->setText(QString::number(inputs.gyro.z));
+	ui.outputPadX->setText(QString::number(inputs.circlePad.dx));
+	ui.outputPadY->setText(QString::number(inputs.circlePad.dy));
+	std::vector<std::string> keys = getKeys(inputs.buttons);
+	std::string buttons;
+	for(auto s = keys.begin(); s != keys.end(); s++) {
+		buttons.append(s->c_str());
+		buttons.append("\n");
+	}
+	ui.outputButtons->setPlainText(buttons.c_str());
 }
